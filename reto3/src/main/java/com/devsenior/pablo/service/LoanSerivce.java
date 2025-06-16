@@ -30,10 +30,12 @@ public class LoanSerivce {
     
     public void addLoan(String idUser, String idBook) {
         
-        var validateBook = validateLoanByBook(idBook);
-        if(!validateBook) throw new BookLentYetException();
         var validateUser = validateLoanByUser(idUser);
         if(!validateUser) throw new MaxLoansException();
+
+        var validateBook = validateLoanByBook(idBook);
+        if(!validateBook) throw new BookLentYetException();
+        
         
         var book = bookService.getBookById(idBook);
         var user = userService.getUserbyId(idUser);
@@ -42,13 +44,17 @@ public class LoanSerivce {
     }
 
     public void returnLoan(String idUser, String idBook) {
+        if(loans.isEmpty()){
+            throw new LoanNotFoundException("No hay prestamos para devolver en el momento");
+        }
         var loan = loans.stream()
                 .filter(l -> l.getBook().getId().equals(idBook)
                         && l.getUser().getId().equals(idUser)
                         && l.getState().equals(LoanState.STARTED))
                 .findFirst()
                 .orElseThrow(() -> new LoanNotFoundException(
-                        "Loan not found whit User ID: " + idUser + " or Book ID: " + idBook));
+                        "Prestamo no encontrado con el ID del usuario: " + idUser + 
+                        " O el ID del libro: " + idBook));
         loan.setLoanFinishedDate(LocalDateTime.now());
         loan.setState(LoanState.FINISHED);
     }
@@ -63,19 +69,28 @@ public class LoanSerivce {
         return loans;
     }
     public Boolean validateLoanByUser(String idUser){
+        if(loans.isEmpty()){
+            return true;
+        }
         var countLoans = loans.stream()
         .filter(l -> l.getUser().getId().equals(idUser)
                     && l.getState().STARTED == LoanState.STARTED
         )
         .count();
-        return countLoans > maxLoans;
+        return countLoans < maxLoans;
     }
 
     public Boolean validateLoanByBook(String idBook){
+        if(loans.isEmpty()){
+            return true;
+        }
         var alreadyLent = loans.stream()
         .filter(l -> l.getBook().getId().equals(idBook))
-        .findFirst().get();
-        switch (alreadyLent.getState()) {
+        .findFirst();
+        if(!alreadyLent.isPresent()){
+            return true;
+        }
+        switch (alreadyLent.get().getState()) {
             case STARTED -> {
                 return false;
             }

@@ -1,6 +1,8 @@
 C:\Users\Juanpa\Documents\Retos DevSenior\Reto3\reto3\src\main\java\com\devsenior\pablo\exception\BookAlreadyExistException.java
+C:\Users\Juanpa\Documents\Retos DevSenior\Reto3\reto3\src\main\java\com\devsenior\pablo\exception\BookLentYetException.java
 C:\Users\Juanpa\Documents\Retos DevSenior\Reto3\reto3\src\main\java\com\devsenior\pablo\exception\BookNotFoundException.java
 C:\Users\Juanpa\Documents\Retos DevSenior\Reto3\reto3\src\main\java\com\devsenior\pablo\exception\LoanNotFoundException.java
+C:\Users\Juanpa\Documents\Retos DevSenior\Reto3\reto3\src\main\java\com\devsenior\pablo\exception\MaxLoansException.java
 C:\Users\Juanpa\Documents\Retos DevSenior\Reto3\reto3\src\main\java\com\devsenior\pablo\exception\UserNotFoundException.java
 C:\Users\Juanpa\Documents\Retos DevSenior\Reto3\reto3\src\main\java\com\devsenior\pablo\Main.java
 C:\Users\Juanpa\Documents\Retos DevSenior\Reto3\reto3\src\main\java\com\devsenior\pablo\model\Book.java
