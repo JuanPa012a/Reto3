@@ -1,0 +1,12 @@
+C:\Users\Juanpa\Documents\Retos DevSenior\Reto3\reto3\src\main\java\com\devsenior\pablo\exception\BookAlreadyExistException.java
+C:\Users\Juanpa\Documents\Retos DevSenior\Reto3\reto3\src\main\java\com\devsenior\pablo\exception\BookNotFoundException.java
+C:\Users\Juanpa\Documents\Retos DevSenior\Reto3\reto3\src\main\java\com\devsenior\pablo\exception\LoanNotFoundException.java
+C:\Users\Juanpa\Documents\Retos DevSenior\Reto3\reto3\src\main\java\com\devsenior\pablo\exception\UserNotFoundException.java
+C:\Users\Juanpa\Documents\Retos DevSenior\Reto3\reto3\src\main\java\com\devsenior\pablo\Main.java
+C:\Users\Juanpa\Documents\Retos DevSenior\Reto3\reto3\src\main\java\com\devsenior\pablo\model\Book.java
+C:\Users\Juanpa\Documents\Retos DevSenior\Reto3\reto3\src\main\java\com\devsenior\pablo\model\enums\LoanState.java
+C:\Users\Juanpa\Documents\Retos DevSenior\Reto3\reto3\src\main\java\com\devsenior\pablo\model\Loan.java
+C:\Users\Juanpa\Documents\Retos DevSenior\Reto3\reto3\src\main\java\com\devsenior\pablo\model\User.java
+C:\Users\Juanpa\Documents\Retos DevSenior\Reto3\reto3\src\main\java\com\devsenior\pablo\service\BookService.java
+C:\Users\Juanpa\Documents\Retos DevSenior\Reto3\reto3\src\main\java\com\devsenior\pablo\service\LoanSerivce.java
+C:\Users\Juanpa\Documents\Retos DevSenior\Reto3\reto3\src\main\java\com\devsenior\pablo\service\UserService.java
