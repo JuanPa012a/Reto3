@@ -12,7 +12,6 @@ public class UserServiceTest {
     private UserService userService;
 
     @BeforeEach
-    @SuppressWarnings("unused")
     void setUp(){
         userService = new UserService();
     }
