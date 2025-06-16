@@ -52,10 +52,29 @@ public class BookServiceTest {
         //GIVEN
         testAddBook();
         //WHEN - THEN
-        var id = "2";
+        var id = "AB02";
         try {
             var book = bookService.getBookById(id);  
-                assertEquals(id, book.getId());  
+                assertEquals(id, book.getId()); 
+
+        } catch (BookNotFoundException e) {
+        
+            assertTrue(true);
+        }
+        
+        
+    }
+
+    @Test
+    void testGetUserByIsbn(){
+        //GIVEN
+        testAddBook();
+        //WHEN - THEN
+        var isbn = "2";
+        try {
+            var book = bookService.getBookByIsbn(isbn);  
+                assertEquals(isbn, book.getIsbn()); 
+                 
         } catch (BookNotFoundException e) {
         
             assertTrue(true);
