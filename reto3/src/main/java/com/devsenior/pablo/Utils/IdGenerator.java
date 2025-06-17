@@ -13,16 +13,16 @@ public class IdGenerator {
         idCounters.put("LOAN", new AtomicInteger(0));
     }
     
-    public static int generateUserId() {
-        return idCounters.get("USER").incrementAndGet();
+    public static String generateUserId() {
+        return ""+idCounters.get("USER").incrementAndGet();
     }
     
-    public static int generateBookId() {
-        return idCounters.get("BOOK").incrementAndGet();
+    public static String generateBookId() {
+        return ""+idCounters.get("BOOK").incrementAndGet();
     }
     
-    public static int generateLoanId() {
-        return idCounters.get("LOAN").incrementAndGet();
+    public static String generateLoanId() {
+        return ""+idCounters.get("LOAN").incrementAndGet();
     }
     
     // Method to reset counters (useful for testing)

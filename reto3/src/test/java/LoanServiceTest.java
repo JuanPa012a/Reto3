@@ -45,7 +45,7 @@ public class LoanServiceTest {
 
 
         //When
-        service.addLoan(id, idBook);
+        service.addLoan(userService.getUserbyId(id), bookService.getBookById(idBook));
 
         //Then
 
@@ -74,7 +74,7 @@ public class LoanServiceTest {
       
         Mockito.when(userService.getUserbyId(id)).thenReturn(userMock);
         Mockito.when(bookService.getBookById(idBook)).thenReturn(mockBook);
-        service.addLoan(id, idBook);
+        service.addLoan(userService.getUserbyId(id), bookService.getBookById(idBook));
 
         //When
         service.returnLoan(id, idBook);
@@ -104,9 +104,9 @@ public class LoanServiceTest {
       
         Mockito.when(userService.getUserbyId(id)).thenReturn(userMock);
         Mockito.when(bookService.getBookById(idBook)).thenReturn(mockBook);
-        service.addLoan(id, idBook);
+        service.addLoan(userService.getUserbyId(id), bookService.getBookById(idBook));
         //WHEN - THEN
-        assertThrows(BookLentYetException.class, ()-> service.addLoan(id, idBook));
+        assertThrows(BookLentYetException.class, ()-> service.addLoan(userService.getUserbyId(id), bookService.getBookById(idBook)));
     }
 
     @Test
@@ -127,11 +127,11 @@ public class LoanServiceTest {
         Mockito.when(userService.getUserbyId(id)).thenReturn(userMock);
         Mockito.when(bookService.getBookById(idBook)).thenReturn(mockBook);
         Mockito.when(bookService.getBookById(idBook2)).thenReturn(mockBook2);
-        service.addLoan(id, idBook);
+        service.addLoan(userService.getUserbyId(id), bookService.getBookById(idBook));
         service.setMaxLoans(0L);
         //WHEN - THEN
          assertThrows(MaxLoansException.class, ()-> 
-        service.addLoan(id, idBook2));
+        service.addLoan(userService.getUserbyId(id), bookService.getBookById(idBook2)));
         
     }
 
@@ -171,10 +171,10 @@ public class LoanServiceTest {
         Mockito.when(bookService.getBookById(idBook2)).thenReturn(book2);
         
         //WHEN
-        service.addLoan(idUser, idBook);
+        service.addLoan(userService.getUserbyId(idUser), bookService.getBookById(idBook));
         //THEN
-        assertDoesNotThrow(() -> service.addLoan(idUser2, idBook2));
-        assertThrows(BookLentYetException.class, ()-> service.addLoan(idUser2, idBook));
+        assertDoesNotThrow(() -> service.addLoan(userService.getUserbyId(idUser2), bookService.getBookById(idBook2)));
+        assertThrows(BookLentYetException.class, ()-> service.addLoan(userService.getUserbyId(idUser2), bookService.getBookById(idBook)));
 
     }
 

@@ -7,7 +7,9 @@ import java.util.List;
 import com.devsenior.pablo.exception.BookLentYetException;
 import com.devsenior.pablo.exception.LoanNotFoundException;
 import com.devsenior.pablo.exception.MaxLoansException;
+import com.devsenior.pablo.model.Book;
 import com.devsenior.pablo.model.Loan;
+import com.devsenior.pablo.model.User;
 import com.devsenior.pablo.model.enums.LoanState;
 
 public class LoanSerivce {
@@ -36,19 +38,15 @@ public class LoanSerivce {
         this.maxLoans = maxLoans;
     }
 
-
     
-    public void addLoan(String idUser, String idBook) {
+    public void addLoan(User user, Book book) {
         
-        var validateUser = validateLoanByUser(idUser);
+        var validateUser = validateLoanByUser(user.getId());
         if(!validateUser) throw new MaxLoansException();
 
-        var validateBook = validateLoanByBook(idBook);
+        var validateBook = validateLoanByBook(book.getId());
         if(!validateBook) throw new BookLentYetException();
         
-        
-        var book = bookService.getBookById(idBook);
-        var user = userService.getUserbyId(idUser);
         Loan loan = new Loan(book, user);
         loans.add(loan);
     }
@@ -70,11 +68,21 @@ public class LoanSerivce {
     }
 
     public List<Loan> getAllLoansFromUser(String idUser){
+        var lista = loans.stream()
+        .filter(l -> l.getUser().getId().equals(idUser)).findFirst();
+        if(!lista.isPresent()){
+            throw new LoanNotFoundException("No hay prestamos registrados con este usuario");
+        }
         return loans.stream()
         .filter(l -> l.getUser().getId().equals(idUser))
         .toList();
     }
     public List<Loan> getAllLoansFromBook(String idBook){
+        var lista = loans.stream()
+        .filter(l -> l.getBook().getId().equals(idBook)).findFirst();
+        if(!lista.isPresent()){
+            throw new LoanNotFoundException("No hay prestamos registrados con este libro");
+        }
         return loans.stream()
         .filter(l -> l.getBook().getId().equals(idBook))
         .toList();
@@ -82,6 +90,9 @@ public class LoanSerivce {
 
 
     public List<Loan> getLoans() {
+        if(loans.isEmpty()){
+            throw new LoanNotFoundException("No hay prestamos registrados");
+        }
         return loans;
     }
     public Boolean validateLoanByUser(String idUser){
@@ -93,7 +104,7 @@ public class LoanSerivce {
                     && l.getState().STARTED == LoanState.STARTED
         )
         .count();
-        return countLoans < maxLoans;
+        return countLoans <= maxLoans;
     }
 
     public Boolean validateLoanByBook(String idBook){
@@ -102,7 +113,7 @@ public class LoanSerivce {
         }
         var alreadyLent = loans.stream()
         .filter(l -> l.getBook().getId().equals(idBook))
-        .findFirst();
+        .reduce((first, second) -> second);
         if(!alreadyLent.isPresent()){
             return true;
         }

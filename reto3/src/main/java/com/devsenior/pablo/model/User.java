@@ -23,7 +23,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "| ID: "+ id + "Nombre: "+name;
+        return "| ID: "+ id + "| Nombre: "+name;
     }
 
     

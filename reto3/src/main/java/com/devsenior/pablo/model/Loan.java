@@ -1,6 +1,7 @@
 package com.devsenior.pablo.model;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import com.devsenior.pablo.model.enums.LoanState;
 
@@ -10,6 +11,7 @@ public class Loan {
     private LocalDateTime loanDate;
     private LocalDateTime loanFinishedDate;
     private LoanState state;
+    
 
     public Loan(Book book, User user, LocalDateTime loanDate) {
         this.book = book;
@@ -69,11 +71,18 @@ public class Loan {
 
     @Override
     public String toString() {
-        return "| Libro: "+book+ "\n"+
-        "| User: "+ user + "\n"+
-        "| Fecha de prestamo: " + loanDate +"\n"+
-        "| Fecha finalizado: " + loanFinishedDate+ "\n"+
-        "| Estado: " + state.name(); 
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        String formattedLoanDate = loanDate != null ? loanDate.format(formatter) : "No disponible";
+        String formattedFinishedDate = loanFinishedDate != null ? loanFinishedDate.format(formatter) : "No disponible";
+        
+        return"""
+              ====================
+              | Libro: """+book+ "\n"+
+        "| Usuario: "+ user + "\n"+
+        "| Fecha de prestamo: " + formattedLoanDate +"\n"+
+        "| Fecha finalizado: " + formattedFinishedDate+ "\n"+
+        "| Estado: " + state.name() + 
+        "\n===================="; 
     }
 
 }

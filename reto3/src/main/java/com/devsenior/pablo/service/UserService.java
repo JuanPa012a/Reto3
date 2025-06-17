@@ -25,6 +25,13 @@ public class UserService {
         return users;
     }
 
+    public Boolean isEmpty(){
+        if(users.isEmpty()){
+            throw  new UserNotFoundException("No hay usuarios registrados en el momento");
+        }
+        return true;
+    }
+
     public User getUserbyId(String id) {
         return users.stream()
                 .filter(u -> u.getId().equals(id))
