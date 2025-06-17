@@ -38,4 +38,10 @@ public class Book {
         this.autor = autor;
     }
 
+    @Override
+    public String toString() {
+        return "| ID: " + id + "| ISBN: "+isbn+ "| Titulo: "+titulo + "| Autor: " +autor ;
+    }
+
+    
 }

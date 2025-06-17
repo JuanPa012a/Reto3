@@ -15,6 +15,7 @@ public class LoanSerivce {
     private final UserService userService;
     private final List<Loan> loans;
     private  Long maxLoans;
+    
 
     public LoanSerivce(BookService bookService, UserService userService) {
         this.bookService = bookService;
@@ -22,6 +23,15 @@ public class LoanSerivce {
         this.maxLoans = 3L;
         this.loans = new ArrayList<>();
     }
+
+    public BookService getBookService() {
+        return bookService;
+    }
+
+    public UserService getUserService() {
+        return userService;
+    }
+    
     public void setMaxLoans(Long maxLoans) {
         this.maxLoans = maxLoans;
     }
@@ -64,6 +74,12 @@ public class LoanSerivce {
         .filter(l -> l.getUser().getId().equals(idUser))
         .toList();
     }
+    public List<Loan> getAllLoansFromBook(String idBook){
+        return loans.stream()
+        .filter(l -> l.getBook().getId().equals(idBook))
+        .toList();
+    }
+
 
     public List<Loan> getLoans() {
         return loans;
@@ -99,6 +115,12 @@ public class LoanSerivce {
             }
             default -> throw new AssertionError();
         }
+    }
+
+    
+
+    public Long getMaxLoans() {
+        return maxLoans;
     }
 
 

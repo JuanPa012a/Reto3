@@ -67,4 +67,13 @@ public class Loan {
         this.state = state;
     }
 
+    @Override
+    public String toString() {
+        return "| Libro: "+book+ "\n"+
+        "| User: "+ user + "\n"+
+        "| Fecha de prestamo: " + loanDate +"\n"+
+        "| Fecha finalizado: " + loanFinishedDate+ "\n"+
+        "| Estado: " + state.name(); 
+    }
+
 }
